@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sin-honcho-rollback"
+version = "0.1.0"
+description = "Snapshot + rollback + audit log for sin-brain / Honcho memory"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "OpenSIN-Code"},
+]
+keywords = [
+    "sin-brain", "honcho", "rollback", "snapshot", "audit-log",
+    "memory", "agent-memory", "time-travel",
+]
+dependencies = [
+    "typer>=0.12",
+]
+
+[project.optional-dependencies]
+mcp = ["mcp[cli]>=1.2"]
+brain = ["sin-brain>=0.1.0"]
+test = [
+    "pytest>=8.0",
+    "pytest-cov>=4.0",
+]
+
+[project.scripts]
+sin-honcho-rollback = "scripts.sin_honcho_rollback:app"
+
+[tool.setuptools.packages.find]
+include = ["lib*", "scripts*"]
+exclude = ["tests*", "examples*", "templates*", "hooks*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --tb=short"
